@@ -2,29 +2,17 @@ function BasicProfile({ formData, setFormData }) {
   return (
     <div className="card">
       <h2>Basic Profile</h2>
-      <p>Tell us about yourself</p>
+      <p>Tell us about yourself.</p>
 
       <div className="grid">
         <div>
-          <label>Age (years)</label>
-          <input
-            type="number"
-            placeholder="Enter age (10-80)"
-            value={formData.age}
-            onChange={(e) =>
-              setFormData({ ...formData, age: e.target.value })
-            }
-          />
+          <label>Age</label>
+          <input type="number" value={formData.age} onChange={(e) => setFormData({ ...formData, age: e.target.value })} />
         </div>
 
         <div>
           <label>Gender</label>
-          <select
-            value={formData.gender}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-          >
+          <select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value })}>
             <option value="">Select gender</option>
             <option>Male</option>
             <option>Female</option>
@@ -33,40 +21,36 @@ function BasicProfile({ formData, setFormData }) {
 
         <div>
           <label>Height (cm)</label>
-          <input
-            type="number"
-            placeholder="Enter height (50-275 cm)"
-            value={formData.height}
-            onChange={(e) =>
-              setFormData({ ...formData, height: e.target.value })
-            }
-          />
+          <input type="number" value={formData.height} onChange={(e) => setFormData({ ...formData, height: e.target.value })} />
         </div>
 
         <div>
-          <label>Current Body Weight (kg)</label>
-          <input
-            type="number"
-            placeholder="Enter weight (30-250 kg)"
-            value={formData.weight}
-            onChange={(e) =>
-              setFormData({ ...formData, weight: e.target.value })
-            }
-          />
+          <label>Current Weight (kg)</label>
+          <input type="number" value={formData.weight} onChange={(e) => setFormData({ ...formData, weight: e.target.value })} />
         </div>
 
         <div>
-          <label>Primary Training Type</label>
-          <select
-            value={formData.trainingType}
-            onChange={(e) =>
-              setFormData({ ...formData, trainingType: e.target.value })
-            }
-          >
-            <option value="">Select training type</option>
+          <label>Target Weight (kg)</label>
+          <input type="number" value={formData.targetWeight} onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })} />
+        </div>
+
+        <div>
+          <label>Plan Type</label>
+          <select value={formData.planType} onChange={(e) => setFormData({ ...formData, planType: e.target.value })}>
+            <option value="">Select plan type</option>
+            <option>Diet Plan Only</option>
+            <option>Workout Plan Only</option>
+            <option>Diet + Workout Plan</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Training Type</label>
+          <select value={formData.trainingType} onChange={(e) => setFormData({ ...formData, trainingType: e.target.value })}>
+            <option value="">Select training</option>
             <option>Gym / Strength Training</option>
             <option>Home Workout</option>
-            <option>Cardio / Running</option>
+            <option>Cardio</option>
             <option>Sports</option>
             <option>No Training</option>
           </select>
@@ -74,13 +58,8 @@ function BasicProfile({ formData, setFormData }) {
 
         <div>
           <label>Activity Level</label>
-          <select
-            value={formData.activityLevel}
-            onChange={(e) =>
-              setFormData({ ...formData, activityLevel: e.target.value })
-            }
-          >
-            <option value="">Select activity level</option>
+          <select value={formData.activityLevel} onChange={(e) => setFormData({ ...formData, activityLevel: e.target.value })}>
+            <option value="">Select activity</option>
             <option>Sedentary</option>
             <option>Lightly Active</option>
             <option>Moderately Active</option>
@@ -90,13 +69,8 @@ function BasicProfile({ formData, setFormData }) {
 
         <div>
           <label>Meals Per Day</label>
-          <select
-            value={formData.mealsPerDay}
-            onChange={(e) =>
-              setFormData({ ...formData, mealsPerDay: e.target.value })
-            }
-          >
-            <option value="">Select meals per day</option>
+          <select value={formData.mealsPerDay} onChange={(e) => setFormData({ ...formData, mealsPerDay: e.target.value })}>
+            <option value="">Select meals</option>
             <option>3 Meals</option>
             <option>4 Meals</option>
             <option>5 Meals</option>
@@ -106,12 +80,7 @@ function BasicProfile({ formData, setFormData }) {
 
         <div>
           <label>Daily Food Budget</label>
-          <select
-            value={formData.budget}
-            onChange={(e) =>
-              setFormData({ ...formData, budget: e.target.value })
-            }
-          >
+          <select value={formData.budget} onChange={(e) => setFormData({ ...formData, budget: e.target.value })}>
             <option value="">Select budget</option>
             <option>₹100-₹200/day</option>
             <option>₹200-₹300/day</option>
