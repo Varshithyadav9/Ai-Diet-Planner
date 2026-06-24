@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function ResultPage({ formData, setPage }) {
+  const [copied, setCopied] = useState(false);
+
   const getFoodsByStatus = (status) => {
     const foods = {
       Chicken: formData.chicken,
@@ -40,71 +44,25 @@ This is NOT medical advice. Do not diagnose conditions or make medical claims.
 STRUCTURE YOUR RESPONSE EXACTLY AS FOLLOWS:
 
 1) SHORT DISCLAIMER
-
 2) PERSON SNAPSHOT
-
 3) GOAL STRATEGY
-
 4) DAILY CALORIE & MACRO TARGET
-
-5) ONE-DAY SAMPLE MEAL PLAN
-
-For EACH meal, use this table format:
-
-| Meal | Main Foods | Alternatives | Approx Calories | Protein |
-
-In the Alternatives column:
-- Give 2–3 realistic Indian alternatives.
-- Keep calories and protein similar.
-- Respect preferred and acceptable foods.
-- Do NOT suggest foods marked as avoid.
-
-Example:
-Chicken curry + rice → fish curry + rice OR soya chunks + rice OR paneer curry + roti  
-Oats + milk → poha + eggs OR idli + sambar OR upma + curd  
-Paneer curry → soya chunks OR eggs OR chicken curry
-
+5) ONE-DAY SAMPLE MEAL PLAN WITH ALTERNATIVES
 6) SUPPLEMENT USE
-
-Only include supplements if whey, creatine, or multivitamins are preferred or acceptable.
-
 7) FLEXIBILITY NOTES
-
-Explain food swaps clearly.
-
-Must include examples like:
-- Chicken ↔ fish ↔ eggs ↔ paneer ↔ soya chunks
-- Paneer ↔ eggs ↔ dal ↔ chana ↔ soy
-- Rice ↔ roti ↔ oats ↔ poha ↔ idli ↔ dosa
-- Milk ↔ curd ↔ buttermilk
-- Nuts ↔ seeds ↔ groundnuts
-
-Also explain:
-- What to do if a meal is missed
-- What to eat while eating outside
-- What to do on low appetite days
-- How to replace expensive foods with cheaper foods
-
 8) HABIT & LIFESTYLE TIPS
-
 9) MINDSET REMINDER
-
 10) FINAL REMINDER
-
-End with:
-“This is only a sample plan. Individual needs vary, and adjustments may be required over time.”
-
-----------------------------------
 
 USER PROFILE:
 - Age: ${formData.age || "Not specified"}
 - Gender: ${formData.gender || "Not specified"}
 - Height: ${formData.height || "Not specified"} cm
-- Current body weight: ${formData.weight || "Not specified"} kg
+- Weight: ${formData.weight || "Not specified"} kg
 - Activity level: ${formData.activityLevel || "Not specified"}
-- Primary training type: ${formData.trainingType || "Not specified"}
-- Preferred meals per day: ${formData.mealsPerDay || "Not specified"}
-- Daily food budget: ${formData.budget || "Not specified"}
+- Training type: ${formData.trainingType || "Not specified"}
+- Meals per day: ${formData.mealsPerDay || "Not specified"}
+- Budget: ${formData.budget || "Not specified"}
 
 BODY GOAL:
 - ${formData.goal || "Not specified"}
@@ -112,48 +70,82 @@ BODY GOAL:
 FOOD PREFERENCES:
 - Preferred foods: ${getFoodsByStatus("Preferred")}
 - Acceptable foods: ${getFoodsByStatus("Acceptable")}
-- Foods to avoid completely: ${getFoodsByStatus("Avoid")}
+- Foods to avoid: ${getFoodsByStatus("Avoid")}
 
-LIFESTYLE & HABITS:
-- Smoking status: ${formData.smoking || "Not specified"}
-- Alcohol consumption: ${formData.alcohol || "Not specified"}
-- Sleep duration: ${formData.sleep || "Not specified"}
-- Stress level: ${formData.stress || "Not specified"}
-- Cooking time tolerance: ${formData.cookingTime || "Not specified"}
+LIFESTYLE:
+- Smoking: ${formData.smoking || "Not specified"}
+- Alcohol: ${formData.alcohol || "Not specified"}
+- Sleep: ${formData.sleep || "Not specified"}
+- Stress: ${formData.stress || "Not specified"}
+- Cooking time: ${formData.cookingTime || "Not specified"}
 - Spice tolerance: ${formData.spiceTolerance || "Not specified"}
 
-CONSTRAINTS:
-- Use commonly available Indian foods
-- Keep meals affordable and realistic
-- Prefer whole foods first
-- Supplements only if listed in user foods
-- No extreme calorie deficits or surpluses
-- No medical or clinical claims.
+MEAL TABLE FORMAT:
+| Meal | Main Foods | Alternatives | Approx Calories | Protein |
+
+For alternatives:
+- Give 2 to 3 options for every meal.
+- Keep calories and protein similar.
+- Use affordable Indian foods.
+- Do not suggest foods marked as Avoid.
+
+Flexibility examples:
+Chicken ↔ fish ↔ eggs ↔ paneer ↔ soya chunks
+Rice ↔ roti ↔ oats ↔ poha ↔ idli ↔ dosa
+Milk ↔ curd ↔ buttermilk
+Nuts ↔ seeds ↔ groundnuts
+
+End with:
+“This is only a sample plan. Individual needs vary, and adjustments may be required over time.”
 `;
 
   function copyPrompt() {
     navigator.clipboard.writeText(prompt);
-    alert("Prompt copied successfully!");
+    setCopied(true);
   }
 
   return (
     <div className="card result-card">
       <h2>Generated Prompt</h2>
+      <p>Your diet prompt is ready. Copy it and paste it into ChatGPT.</p>
+
+      <div className="summary-box">
+        <h3>Profile Summary</h3>
+        <p><strong>Age:</strong> {formData.age || "Not specified"}</p>
+        <p><strong>Gender:</strong> {formData.gender || "Not specified"}</p>
+        <p><strong>Height:</strong> {formData.height || "Not specified"} cm</p>
+        <p><strong>Weight:</strong> {formData.weight || "Not specified"} kg</p>
+        <p><strong>Goal:</strong> {formData.goal || "Not specified"}</p>
+        <p><strong>Preferred Foods:</strong> {getFoodsByStatus("Preferred")}</p>
+        <p><strong>Avoid Foods:</strong> {getFoodsByStatus("Avoid")}</p>
+      </div>
 
       <textarea className="prompt-box" value={prompt} readOnly />
 
+      {copied && <p className="success-msg">Prompt copied successfully.</p>}
+
       <div className="result-buttons">
         <button onClick={copyPrompt} className="dark-btn">
-          📋 Copy Prompt
+          Copy Prompt
         </button>
 
         <a href="https://chatgpt.com" target="_blank" rel="noreferrer">
-          <button className="green-btn">🤖 Open ChatGPT</button>
+          <button className="green-btn">Open ChatGPT</button>
         </a>
 
         <button onClick={() => setPage(1)} className="reset-btn">
-          Reset
+          Edit Answers
         </button>
+      </div>
+
+      <div className="next-steps">
+        <h3>What to do next?</h3>
+        <ol>
+          <li>Copy the prompt.</li>
+          <li>Open ChatGPT.</li>
+          <li>Paste the prompt.</li>
+          <li>Get your personalized diet plan.</li>
+        </ol>
       </div>
     </div>
   );
