@@ -445,4 +445,37 @@ textarea {
   .bottom-nav {
     gap: 10px;
   }
+}.goal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.goal-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  background: white;
+}
+
+.goal-card h3 {
+  margin: 0 0 10px;
+  color: #111827;
+}
+
+.goal-card p {
+  color: #4b5563;
+  margin: 0;
+}
+
+.goal-card.selected {
+  border: 2px solid #16a34a;
+  background: #f0fdf4;
+}
+
+@media (max-width: 700px) {
+  .goal-grid {
+    grid-template-columns: 1fr;
+  }
 }
