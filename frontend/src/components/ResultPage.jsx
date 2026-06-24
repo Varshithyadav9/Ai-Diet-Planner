@@ -23,7 +23,7 @@ STRUCTURE YOUR RESPONSE EXACTLY AS FOLLOWS:
 2) PERSON SNAPSHOT
 3) GOAL STRATEGY
 4) DAILY CALORIE & MACRO TARGET
-5) ONE-DAY SAMPLE MEAL PLAN
+5) ONE-DAY SAMPLE MEAL PLAN WITH ALTERNATIVES
 6) SUPPLEMENT USE
 7) FLEXIBILITY NOTES
 8) HABIT & LIFESTYLE TIPS
@@ -46,26 +46,26 @@ BODY GOAL:
 - ${formData.goal || "Not specified"}
 
 FOOD PREFERENCES:
-Chicken: ${formData.chicken || "Not specified"}
-Mutton: ${formData.mutton || "Not specified"}
-Fish: ${formData.fish || "Not specified"}
-Eggs: ${formData.eggs || "Not specified"}
-Milk: ${formData.milk || "Not specified"}
-Curd: ${formData.curd || "Not specified"}
-Paneer: ${formData.paneer || "Not specified"}
-Dal: ${formData.dal || "Not specified"}
-Chana: ${formData.chana || "Not specified"}
-Soy: ${formData.soy || "Not specified"}
-Rice: ${formData.rice || "Not specified"}
-Roti: ${formData.roti || "Not specified"}
-Oats: ${formData.oats || "Not specified"}
-Ghee: ${formData.ghee || "Not specified"}
-Butter: ${formData.butter || "Not specified"}
-Nuts: ${formData.nuts || "Not specified"}
-Seeds: ${formData.seeds || "Not specified"}
-Whey Protein: ${formData.whey || "Not specified"}
-Creatine: ${formData.creatine || "Not specified"}
-Multivitamins: ${formData.multivitamins || "Not specified"}
+- Chicken: ${formData.chicken || "Not specified"}
+- Mutton: ${formData.mutton || "Not specified"}
+- Fish: ${formData.fish || "Not specified"}
+- Eggs: ${formData.eggs || "Not specified"}
+- Milk: ${formData.milk || "Not specified"}
+- Curd: ${formData.curd || "Not specified"}
+- Paneer: ${formData.paneer || "Not specified"}
+- Dal: ${formData.dal || "Not specified"}
+- Chana: ${formData.chana || "Not specified"}
+- Soy: ${formData.soy || "Not specified"}
+- Rice: ${formData.rice || "Not specified"}
+- Roti: ${formData.roti || "Not specified"}
+- Oats: ${formData.oats || "Not specified"}
+- Ghee: ${formData.ghee || "Not specified"}
+- Butter: ${formData.butter || "Not specified"}
+- Nuts: ${formData.nuts || "Not specified"}
+- Seeds: ${formData.seeds || "Not specified"}
+- Whey Protein: ${formData.whey || "Not specified"}
+- Creatine: ${formData.creatine || "Not specified"}
+- Multivitamins: ${formData.multivitamins || "Not specified"}
 
 LIFESTYLE & HABITS:
 - Smoking status: ${formData.smoking || "Not specified"}
@@ -82,11 +82,35 @@ CONSTRAINTS:
 - Supplements only if listed in user foods
 - No extreme calorie deficits or surpluses
 - No medical or clinical claims.
+
+MEAL PLAN FORMAT REQUIREMENT:
+For the ONE-DAY SAMPLE MEAL PLAN, use this table format:
+
+| Meal | Main Foods | Alternatives | Approx Calories | Protein |
+
+For EACH meal:
+- Include realistic preparation styles.
+- Include 2–3 alternative food options in the Alternatives column.
+- Keep alternatives affordable and commonly available in India.
+- Keep calories and protein roughly similar.
+- Respect foods marked as Avoid.
+- Do not suggest foods the user marked as Avoid.
+
+Examples:
+- Chicken alternatives: fish, eggs, paneer, soya chunks.
+- Paneer alternatives: eggs, chicken, tofu, soya chunks.
+- Rice alternatives: roti, dosa, idli, potato.
+- Oats alternatives: poha, upma, idli.
+- Milk alternatives: curd, buttermilk, soy milk.
+
+FINAL REMINDER:
+End with:
+“This is only a sample plan. Individual needs vary, and adjustments may be required over time.”
 `;
 
   function copyPrompt() {
     navigator.clipboard.writeText(prompt);
-    alert("Prompt copied!");
+    alert("Prompt copied successfully!");
   }
 
   return (
@@ -100,15 +124,10 @@ CONSTRAINTS:
       </div>
 
       <div className="warning">
-        ⚠️ This generates a sample diet prompt only. This is NOT medical advice. Do not blindly follow it.
+        ⚠️ This generates a sample diet prompt only. This is NOT medical advice.
       </div>
 
       <textarea className="prompt-box" value={prompt} readOnly />
-
-      <label className="check-row">
-        <input type="checkbox" />
-        I understand that this is only a sample prompt and not medical advice
-      </label>
 
       <div className="result-buttons">
         <button onClick={copyPrompt} className="dark-btn">
@@ -116,7 +135,7 @@ CONSTRAINTS:
         </button>
 
         <a href="https://chatgpt.com" target="_blank" rel="noreferrer">
-          <button className="green-btn">🤖 Open in ChatGPT</button>
+          <button className="green-btn">🤖 Open ChatGPT</button>
         </a>
 
         <button onClick={() => setPage(1)} className="reset-btn">
