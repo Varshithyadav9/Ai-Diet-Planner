@@ -1,34 +1,98 @@
 function ResultPage({ formData, setPage }) {
+  const getFoodsByStatus = (status) => {
+    const foods = {
+      Chicken: formData.chicken,
+      Mutton: formData.mutton,
+      Fish: formData.fish,
+      Eggs: formData.eggs,
+      Milk: formData.milk,
+      Curd: formData.curd,
+      Paneer: formData.paneer,
+      Dal: formData.dal,
+      Chana: formData.chana,
+      Soy: formData.soy,
+      Rice: formData.rice,
+      Roti: formData.roti,
+      Oats: formData.oats,
+      Ghee: formData.ghee,
+      Butter: formData.butter,
+      Nuts: formData.nuts,
+      Seeds: formData.seeds,
+      Whey: formData.whey,
+      Creatine: formData.creatine,
+      Multivitamins: formData.multivitamins,
+    };
+
+    const selected = Object.entries(foods)
+      .filter(([_, value]) => value === status)
+      .map(([food]) => food);
+
+    return selected.length ? selected.join(", ") : "None specified";
+  };
+
   const prompt = `
-You are a professional Indian dietician and fitness-focused nutrition coach who designs realistic meal plans for normal people (not athletes, not influencers).
+You are a professional Indian dietician and fitness-focused nutrition coach who designs realistic meal plans for normal people.
 
 Your task is to create a highly personalized ONE-DAY sample diet plan based on the user profile below.
 
-This is NOT medical advice. Do not diagnose conditions or make medical claims. Avoid extreme or unsafe recommendations.
-
-Your priorities (in order):
-1. Suit the person's body goal.
-2. Match their lifestyle and constraints.
-3. Keep it simple, affordable, and repeatable.
-4. Encourage consistency over perfection.
-
-TONE:
-- Supportive, practical, and non-judgmental.
-- Avoid fear-based or overly strict language.
-- Do NOT sound like a textbook or generic article.
+This is NOT medical advice. Do not diagnose conditions or make medical claims.
 
 STRUCTURE YOUR RESPONSE EXACTLY AS FOLLOWS:
 
 1) SHORT DISCLAIMER
+
 2) PERSON SNAPSHOT
+
 3) GOAL STRATEGY
+
 4) DAILY CALORIE & MACRO TARGET
-5) ONE-DAY SAMPLE MEAL PLAN WITH ALTERNATIVES
+
+5) ONE-DAY SAMPLE MEAL PLAN
+
+For EACH meal, use this table format:
+
+| Meal | Main Foods | Alternatives | Approx Calories | Protein |
+
+In the Alternatives column:
+- Give 2–3 realistic Indian alternatives.
+- Keep calories and protein similar.
+- Respect preferred and acceptable foods.
+- Do NOT suggest foods marked as avoid.
+
+Example:
+Chicken curry + rice → fish curry + rice OR soya chunks + rice OR paneer curry + roti  
+Oats + milk → poha + eggs OR idli + sambar OR upma + curd  
+Paneer curry → soya chunks OR eggs OR chicken curry
+
 6) SUPPLEMENT USE
+
+Only include supplements if whey, creatine, or multivitamins are preferred or acceptable.
+
 7) FLEXIBILITY NOTES
+
+Explain food swaps clearly.
+
+Must include examples like:
+- Chicken ↔ fish ↔ eggs ↔ paneer ↔ soya chunks
+- Paneer ↔ eggs ↔ dal ↔ chana ↔ soy
+- Rice ↔ roti ↔ oats ↔ poha ↔ idli ↔ dosa
+- Milk ↔ curd ↔ buttermilk
+- Nuts ↔ seeds ↔ groundnuts
+
+Also explain:
+- What to do if a meal is missed
+- What to eat while eating outside
+- What to do on low appetite days
+- How to replace expensive foods with cheaper foods
+
 8) HABIT & LIFESTYLE TIPS
+
 9) MINDSET REMINDER
+
 10) FINAL REMINDER
+
+End with:
+“This is only a sample plan. Individual needs vary, and adjustments may be required over time.”
 
 ----------------------------------
 
@@ -46,26 +110,9 @@ BODY GOAL:
 - ${formData.goal || "Not specified"}
 
 FOOD PREFERENCES:
-- Chicken: ${formData.chicken || "Not specified"}
-- Mutton: ${formData.mutton || "Not specified"}
-- Fish: ${formData.fish || "Not specified"}
-- Eggs: ${formData.eggs || "Not specified"}
-- Milk: ${formData.milk || "Not specified"}
-- Curd: ${formData.curd || "Not specified"}
-- Paneer: ${formData.paneer || "Not specified"}
-- Dal: ${formData.dal || "Not specified"}
-- Chana: ${formData.chana || "Not specified"}
-- Soy: ${formData.soy || "Not specified"}
-- Rice: ${formData.rice || "Not specified"}
-- Roti: ${formData.roti || "Not specified"}
-- Oats: ${formData.oats || "Not specified"}
-- Ghee: ${formData.ghee || "Not specified"}
-- Butter: ${formData.butter || "Not specified"}
-- Nuts: ${formData.nuts || "Not specified"}
-- Seeds: ${formData.seeds || "Not specified"}
-- Whey Protein: ${formData.whey || "Not specified"}
-- Creatine: ${formData.creatine || "Not specified"}
-- Multivitamins: ${formData.multivitamins || "Not specified"}
+- Preferred foods: ${getFoodsByStatus("Preferred")}
+- Acceptable foods: ${getFoodsByStatus("Acceptable")}
+- Foods to avoid completely: ${getFoodsByStatus("Avoid")}
 
 LIFESTYLE & HABITS:
 - Smoking status: ${formData.smoking || "Not specified"}
@@ -82,30 +129,6 @@ CONSTRAINTS:
 - Supplements only if listed in user foods
 - No extreme calorie deficits or surpluses
 - No medical or clinical claims.
-
-MEAL PLAN FORMAT REQUIREMENT:
-For the ONE-DAY SAMPLE MEAL PLAN, use this table format:
-
-| Meal | Main Foods | Alternatives | Approx Calories | Protein |
-
-For EACH meal:
-- Include realistic preparation styles.
-- Include 2–3 alternative food options in the Alternatives column.
-- Keep alternatives affordable and commonly available in India.
-- Keep calories and protein roughly similar.
-- Respect foods marked as Avoid.
-- Do not suggest foods the user marked as Avoid.
-
-Examples:
-- Chicken alternatives: fish, eggs, paneer, soya chunks.
-- Paneer alternatives: eggs, chicken, tofu, soya chunks.
-- Rice alternatives: roti, dosa, idli, potato.
-- Oats alternatives: poha, upma, idli.
-- Milk alternatives: curd, buttermilk, soy milk.
-
-FINAL REMINDER:
-End with:
-“This is only a sample plan. Individual needs vary, and adjustments may be required over time.”
 `;
 
   function copyPrompt() {
@@ -115,17 +138,7 @@ End with:
 
   return (
     <div className="card result-card">
-      <div className="section-title">
-        <div className="icon-box">📋</div>
-        <div>
-          <h2>Generated Prompt</h2>
-          <p>Your diet prompt is ready to copy.</p>
-        </div>
-      </div>
-
-      <div className="warning">
-        ⚠️ This generates a sample diet prompt only. This is NOT medical advice.
-      </div>
+      <h2>Generated Prompt</h2>
 
       <textarea className="prompt-box" value={prompt} readOnly />
 
