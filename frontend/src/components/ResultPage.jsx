@@ -131,6 +131,16 @@ End with:
         </button>
       </div>
 
+      <div className="next-steps">
+        <h3>How to Use This Prompt</h3>
+        <ol>
+          <li>Copy the prompt.</li>
+          <li>Open ChatGPT.</li>
+          <li>Paste the prompt.</li>
+          <li>Get your personalized plan.</li>
+        </ol>
+      </div>
+
       <div className="paid-plan-box">
         <h3>Need a Professional Plan?</h3>
         <p>
@@ -141,13 +151,13 @@ End with:
         <div className="price-grid">
           <div className="price-card">
             <h4>Diet Plan</h4>
-            <p>Personalized calories, macros, Indian meals and alternatives.</p>
+            <p>Calories, macros, Indian meals and alternatives.</p>
             <strong>₹199</strong>
           </div>
 
           <div className="price-card">
             <h4>Workout Plan</h4>
-            <p>Weekly workout split, exercises, sets, reps and cardio guidance.</p>
+            <p>Weekly workout split, exercises, sets, reps and cardio.</p>
             <strong>₹199</strong>
           </div>
 
@@ -158,21 +168,15 @@ End with:
           </div>
         </div>
 
-        <img src="/scanner.jpg" alt="Payment QR Scanner" className="scanner-img" />
+        <a href="/scanner.jpg" target="_blank" rel="noreferrer">
+          <img src="/scanner.jpg" alt="Payment QR Scanner" className="scanner-img" />
+        </a>
+
+        <p className="scanner-click-text">Click the QR code to open it clearly.</p>
 
         <p className="payment-note">
           After payment, DM screenshot to <strong>@lean_varshith</strong>
         </p>
-      </div>
-
-      <div className="next-steps">
-        <h3>What to do next?</h3>
-        <ol>
-          <li>Copy the prompt.</li>
-          <li>Open ChatGPT.</li>
-          <li>Paste the prompt.</li>
-          <li>Get your personalized plan.</li>
-        </ol>
       </div>
     </div>
   );
