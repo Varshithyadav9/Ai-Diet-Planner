@@ -541,4 +541,50 @@ textarea {
 
 .next-steps ol {
   padding-left: 20px;
+}.price-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.price-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
+}
+
+.price-card h4 {
+  margin: 0 0 8px;
+  color: #111827;
+}
+
+.price-card p {
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.price-card strong {
+  display: block;
+  color: #16a34a;
+  font-size: 22px;
+  margin-top: 8px;
+}
+
+.price-card.highlight {
+  border: 2px solid #16a34a;
+  background: #f0fdf4;
+}
+
+.payment-note {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .price-grid {
+    grid-template-columns: 1fr;
+  }
 }

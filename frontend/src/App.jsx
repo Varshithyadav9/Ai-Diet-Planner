@@ -16,13 +16,11 @@ function App() {
     height: "",
     weight: "",
     targetWeight: "",
-
     trainingType: "",
     activityLevel: "",
     mealsPerDay: "",
     budget: "",
     planType: "",
-
     goal: "",
 
     chicken: "",
@@ -64,7 +62,7 @@ function App() {
     <div className="app">
       <header className="top-header">
         <h1>Diet Prompt Generator</h1>
-        <p>Generate a clear, detailed diet prompt you can paste into any AI.</p>
+        <p>Generate a clear, detailed diet prompt you can paste into ChatGPT.</p>
       </header>
 
       <div className="stepper">
