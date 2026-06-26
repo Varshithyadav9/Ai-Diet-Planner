@@ -14,7 +14,6 @@ function App() {
     name: "",
     email: "",
     mobile: "",
-
     age: "",
     gender: "",
     height: "",
@@ -26,7 +25,6 @@ function App() {
     budget: "",
     planType: "",
     goal: "",
-
     chicken: "",
     mutton: "",
     fish: "",
@@ -47,7 +45,6 @@ function App() {
     whey: "",
     creatine: "",
     multivitamins: "",
-
     smoking: "",
     alcohol: "",
     sleep: "",
@@ -142,17 +139,14 @@ function App() {
               <h3>Personalized Nutrition</h3>
               <p>Indian meal plans, calories, macros and food alternatives.</p>
             </div>
-
             <div className="feature-card">
               <h3>Workout Programs</h3>
               <p>Gym and home workout plans based on your fitness goal.</p>
             </div>
-
             <div className="feature-card">
               <h3>Progress Tracking</h3>
               <p>Track calories, water, weight and weekly fitness progress.</p>
             </div>
-
             <div className="feature-card">
               <h3>Lean Pro Membership</h3>
               <p>Monthly support, plan updates and progress dashboard access.</p>
@@ -193,19 +187,15 @@ function App() {
           {page === 1 && (
             <BasicProfile formData={formData} setFormData={setFormData} />
           )}
-
           {page === 2 && (
             <GoalPage formData={formData} setFormData={setFormData} />
           )}
-
           {page === 3 && (
             <FoodPreferences formData={formData} setFormData={setFormData} />
           )}
-
           {page === 4 && (
             <HabitsPage formData={formData} setFormData={setFormData} />
           )}
-
           {page === 5 && <ResultPage formData={formData} setPage={setPage} />}
 
           <div className="bottom-nav">
