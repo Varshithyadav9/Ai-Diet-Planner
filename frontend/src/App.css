@@ -607,4 +607,17 @@ textarea {
 
 .next-steps ol {
   padding-left: 20px;
+}.price-card {
+  cursor: pointer;
+}
+
+.selected-plan {
+  border: 2px solid #16a34a;
+  background: #f0fdf4;
+}
+
+.selected-text {
+  margin-top: 12px;
+  font-weight: 700;
+  color: #111827;
 }

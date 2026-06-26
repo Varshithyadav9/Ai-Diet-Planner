@@ -1,11 +1,30 @@
+import { useState } from "react";
+
 function ResultPage({ formData, setPage }) {
+  const [selectedPlan, setSelectedPlan] = useState("");
+
+  const plans = [
+    {
+      name: "Diet Plan",
+      price: "₹199",
+      desc: "Calories, macros, Indian meals and food alternatives.",
+    },
+    {
+      name: "Workout Plan",
+      price: "₹199",
+      desc: "Workout split, exercises, sets, reps and cardio.",
+    },
+    {
+      name: "Diet + Workout",
+      price: "₹349",
+      desc: "Complete diet and workout plan in PDF format.",
+    },
+  ];
+
   return (
     <div className="card result-card">
       <h2>Get Your Professional Plan</h2>
-      <p>
-        Your details are saved. Choose a plan, complete payment, and send the
-        screenshot to receive your PDF plan.
-      </p>
+      <p>Choose your plan, pay using QR, and send screenshot on Instagram.</p>
 
       <div className="summary-box">
         <h3>Your Details</h3>
@@ -13,31 +32,34 @@ function ResultPage({ formData, setPage }) {
         <p><strong>Plan Type:</strong> {formData.planType || "Not specified"}</p>
         <p><strong>Current Weight:</strong> {formData.weight || "Not specified"} kg</p>
         <p><strong>Target Weight:</strong> {formData.targetWeight || "Not specified"} kg</p>
-        <p><strong>Budget:</strong> {formData.budget || "Not specified"}</p>
       </div>
 
       <div className="paid-plan-box">
         <h3>Choose Your Plan</h3>
 
         <div className="price-grid">
-          <div className="price-card">
-            <h4>Diet Plan</h4>
-            <p>Calories, macros, Indian meals, food alternatives.</p>
-            <strong>₹199</strong>
-          </div>
-
-          <div className="price-card">
-            <h4>Workout Plan</h4>
-            <p>Workout split, exercises, sets, reps and cardio.</p>
-            <strong>₹199</strong>
-          </div>
-
-          <div className="price-card highlight">
-            <h4>Diet + Workout</h4>
-            <p>Complete diet and workout plan in PDF format.</p>
-            <strong>₹349</strong>
-          </div>
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={
+                selectedPlan === plan.name
+                  ? "price-card selected-plan"
+                  : "price-card"
+              }
+              onClick={() => setSelectedPlan(plan.name)}
+            >
+              <h4>{plan.name}</h4>
+              <p>{plan.desc}</p>
+              <strong>{plan.price}</strong>
+            </div>
+          ))}
         </div>
+
+        {selectedPlan && (
+          <p className="selected-text">
+            Selected Plan: <strong>{selectedPlan}</strong>
+          </p>
+        )}
 
         <h3>Scan & Pay</h3>
 
@@ -54,8 +76,7 @@ function ResultPage({ formData, setPage }) {
         </p>
 
         <p className="payment-note">
-          After payment, send screenshot on Instagram:
-          <strong> @lean_varshith</strong>
+          After payment, DM screenshot to <strong>@lean_varshith</strong>
         </p>
       </div>
 
@@ -65,16 +86,12 @@ function ResultPage({ formData, setPage }) {
           <li>Select a plan.</li>
           <li>Pay using the QR scanner.</li>
           <li>Send payment screenshot to @lean_varshith.</li>
-          <li>Your PDF plan will be sent after payment verification.</li>
+          <li>Your PDF plan will be sent after verification.</li>
         </ol>
       </div>
 
       <div className="result-buttons">
-        <a
-          href="https://instagram.com/lean_varshith"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="https://instagram.com/lean_varshith" target="_blank" rel="noreferrer">
           <button className="green-btn">Message on Instagram</button>
         </a>
 
