@@ -63,9 +63,9 @@ function ResultPage({ formData, setPage }) {
 
         <h3>Scan & Pay</h3>
 
-        <a href="/scanner.jpg" target="_blank" rel="noreferrer">
+        <a href="/scanner.png" target="_blank" rel="noreferrer">
           <img
-            src="/scanner.jpg"
+            src="/scanner.png"
             alt="Payment QR Scanner"
             className="scanner-img"
           />
@@ -91,7 +91,11 @@ function ResultPage({ formData, setPage }) {
       </div>
 
       <div className="result-buttons">
-        <a href="https://instagram.com/lean_varshith" target="_blank" rel="noreferrer">
+        <a
+          href="https://instagram.com/lean_varshith"
+          target="_blank"
+          rel="noreferrer"
+        >
           <button className="green-btn">Message on Instagram</button>
         </a>
 
@@ -103,10 +107,4 @@ function ResultPage({ formData, setPage }) {
   );
 }
 
-export default ResultPage;<a href="/scanner.png" target="_blank" rel="noreferrer">
-  <img
-    src="/scanner.png"
-    alt="Payment QR"
-    className="scanner-img"
-  />
-</a>
+export default ResultPage;
