@@ -103,4 +103,10 @@ function ResultPage({ formData, setPage }) {
   );
 }
 
-export default ResultPage;
+export default ResultPage;<a href="/scanner.png" target="_blank" rel="noreferrer">
+  <img
+    src="/scanner.png"
+    alt="Payment QR"
+    className="scanner-img"
+  />
+</a>
