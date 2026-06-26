@@ -6,6 +6,7 @@ function ResultPage({ formData, setPage }) {
 
   const upiId = "varshith0409@axl";
   const payeeName = "Lean Varshith";
+  const whatsappNumber = "916302993318";
 
   const plans = [
     {
@@ -35,12 +36,37 @@ function ResultPage({ formData, setPage }) {
       )}`
     : "#";
 
+  const whatsappMessage = selectedPlanData
+    ? `Hello Lean Varshith,
+
+I have completed the payment.
+
+Plan: ${selectedPlanData.name}
+Amount: ₹${selectedPlanData.price}
+UPI ID: ${upiId}
+
+My Details:
+Goal: ${formData.goal || "Not specified"}
+Plan Type: ${formData.planType || "Not specified"}
+Current Weight: ${formData.weight || "Not specified"} kg
+Target Weight: ${formData.targetWeight || "Not specified"} kg
+Age: ${formData.age || "Not specified"}
+Gender: ${formData.gender || "Not specified"}
+Height: ${formData.height || "Not specified"} cm
+
+I am attaching my payment screenshot.`
+    : "Hello Lean Varshith, I want a professional diet/workout plan.";
+
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
+
   return (
     <div className="card result-card">
       <h2>Get Your Professional Plan</h2>
       <p>
-        Choose your plan, pay using UPI, then upload/send your payment screenshot
-        for verification.
+        Choose your plan, pay using UPI, then send your payment screenshot on
+        WhatsApp for verification.
       </p>
 
       <div className="summary-box">
@@ -100,10 +126,7 @@ function ResultPage({ formData, setPage }) {
               </button>
             </a>
 
-            <button
-              className="dark-btn"
-              onClick={() => setPaymentDone(true)}
-            >
+            <button className="dark-btn" onClick={() => setPaymentDone(true)}>
               I Have Completed Payment
             </button>
           </div>
@@ -116,8 +139,8 @@ function ResultPage({ formData, setPage }) {
         <div className="payment-proof-box">
           <h3>Payment Proof</h3>
           <p>
-            After payment, send your screenshot and details on Instagram. Your
-            PDF plan will be sent after verification.
+            After payment, send your screenshot on WhatsApp. Your PDF plan will
+            be sent after verification.
           </p>
 
           <div className="order-summary">
@@ -132,12 +155,8 @@ function ResultPage({ formData, setPage }) {
             </p>
           </div>
 
-          <a
-            href={`https://instagram.com/lean_varshith`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button className="green-btn">Send Screenshot on Instagram</button>
+          <a href={whatsappLink} target="_blank" rel="noreferrer">
+            <button className="green-btn">Send Screenshot on WhatsApp</button>
           </a>
         </div>
       )}
@@ -148,7 +167,7 @@ function ResultPage({ formData, setPage }) {
           <li>Select a plan.</li>
           <li>Click Pay Now and complete payment in PhonePe or any UPI app.</li>
           <li>Click I Have Completed Payment.</li>
-          <li>Send payment screenshot on Instagram.</li>
+          <li>Send payment screenshot on WhatsApp.</li>
           <li>Your PDF plan will be sent after verification.</li>
         </ol>
       </div>
