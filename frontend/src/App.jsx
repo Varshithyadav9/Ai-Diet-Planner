@@ -8,9 +8,13 @@ import HabitsPage from "./components/HabitsPage";
 import ResultPage from "./components/ResultPage";
 
 function App() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+
     age: "",
     gender: "",
     height: "",
@@ -56,50 +60,129 @@ function App() {
     gymTime: "",
   });
 
-  const steps = ["Profile", "Goal", "Food", "Habits", "Prompt"];
+  const steps = ["Profile", "Goal", "Food", "Habits", "Plans"];
 
   return (
     <div className="app">
       <header className="top-header">
-        <h1>Diet Prompt Generator</h1>
-        <p>Generate a clear, detailed diet prompt you can paste into ChatGPT.</p>
+        <h1>LeanFit AI</h1>
+        <p>Personalized diet, workout and fitness tracking by Lean Varshith.</p>
       </header>
 
-      <div className="stepper">
-        {steps.map((step, index) => {
-          const stepNumber = index + 1;
-          return (
-            <div className="step-item" key={step}>
-              <div className={page >= stepNumber ? "step-circle active" : "step-circle"}>
-                {stepNumber}
-              </div>
-              <span>{step}</span>
+      {page === 0 ? (
+        <div className="card welcome-card">
+          <h2>Welcome</h2>
+          <p>Enter your details to start your fitness plan.</p>
+
+          <div className="grid">
+            <div>
+              <label>Name</label>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
             </div>
-          );
-        })}
-      </div>
 
-      {page === 1 && <BasicProfile formData={formData} setFormData={setFormData} />}
-      {page === 2 && <GoalPage formData={formData} setFormData={setFormData} />}
-      {page === 3 && <FoodPreferences formData={formData} setFormData={setFormData} />}
-      {page === 4 && <HabitsPage formData={formData} setFormData={setFormData} />}
-      {page === 5 && <ResultPage formData={formData} setPage={setPage} />}
+            <div>
+              <label>Email ID</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
+            </div>
 
-      <div className="bottom-nav">
-        <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-          Back
-        </button>
+            <div>
+              <label>Mobile Number</label>
+              <input
+                type="tel"
+                placeholder="Enter mobile number"
+                value={formData.mobile}
+                onChange={(e) =>
+                  setFormData({ ...formData, mobile: e.target.value })
+                }
+              />
+            </div>
+          </div>
 
-        <a href="https://instagram.com/lean_varshith" target="_blank" rel="noreferrer">
-          @lean_varshith
-        </a>
+          <button
+            className="start-btn"
+            onClick={() => setPage(1)}
+          >
+            Start My Plan
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="stepper">
+            {steps.map((step, index) => {
+              const stepNumber = index + 1;
+              return (
+                <div className="step-item" key={step}>
+                  <div
+                    className={
+                      page >= stepNumber ? "step-circle active" : "step-circle"
+                    }
+                  >
+                    {stepNumber}
+                  </div>
+                  <span>{step}</span>
+                </div>
+              );
+            })}
+          </div>
 
-        {page < 5 ? (
-          <button onClick={() => setPage(page + 1)}>Next</button>
-        ) : (
-          <button disabled>Next</button>
-        )}
-      </div>
+          {page === 1 && (
+            <BasicProfile formData={formData} setFormData={setFormData} />
+          )}
+
+          {page === 2 && (
+            <GoalPage formData={formData} setFormData={setFormData} />
+          )}
+
+          {page === 3 && (
+            <FoodPreferences formData={formData} setFormData={setFormData} />
+          )}
+
+          {page === 4 && (
+            <HabitsPage formData={formData} setFormData={setFormData} />
+          )}
+
+          {page === 5 && (
+            <ResultPage formData={formData} setPage={setPage} />
+          )}
+
+          <div className="bottom-nav">
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
+              Back
+            </button>
+
+            <a
+              href="https://instagram.com/lean_varshith"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @lean_varshith
+            </a>
+
+            {page < 5 ? (
+              <button onClick={() => setPage(page + 1)}>Next</button>
+            ) : (
+              <button disabled>Next</button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

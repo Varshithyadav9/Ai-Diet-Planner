@@ -665,4 +665,19 @@ textarea {
   .payment-action-box .dark-btn {
     max-width: 100%;
   }
+}.welcome-card {
+  margin-top: 24px;
+}
+
+.start-btn {
+  margin-top: 22px;
+  width: 100%;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 12px;
+  background: #16a34a;
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
 }
